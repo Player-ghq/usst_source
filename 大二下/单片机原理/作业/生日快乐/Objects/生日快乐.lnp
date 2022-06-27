@@ -1,0 +1,3 @@
+".\Objects\birthday.obj" 
+TO ".\Objects\生日快乐" 
+PRINT(".\Listings\生日快乐.m51") RAMSIZE(256) 
