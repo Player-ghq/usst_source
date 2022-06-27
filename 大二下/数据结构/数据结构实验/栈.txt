@@ -1,0 +1,54 @@
+#include<stdio.h>
+#include<cstdlib>
+#include<cstring>
+#include<iostream>
+
+using namespace std;
+
+typedef char ElemType;
+
+typedef struct node
+{  
+    ElemType data;
+    struct node *next;
+
+}LinkStack;
+
+void initstack(LinkStack *&ls){
+    
+    ls = NULL;
+}
+
+int push(LinkStack *&ls,ElemType x){
+
+    LinkStack *p;
+    p=(LinkStack *)malloc(sizeof(LinkStack));
+    p->data = x;
+    p->next = ls;
+    p = ls;
+    return  1;
+}
+
+
+int pop(LinkStack *&ls,ElemType x){
+
+    LinkStack *p;
+    if (ls = NULL){
+        return 0;
+    }else{
+        p = ls;
+        x = p->data;
+        ls= p->next;
+        free(p);
+        return 1;
+    }
+}
+
+
+int main(){
+    LinkStack *ls;
+    initstack(ls);
+    char str[] = "abcedeeg";
+
+}
+
