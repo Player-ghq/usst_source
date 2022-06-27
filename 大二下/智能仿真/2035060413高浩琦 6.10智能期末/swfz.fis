@@ -1,0 +1,45 @@
+[System]
+Name='swfz'
+Type='mamdani'
+Version=2.0
+NumInputs=2
+NumOutputs=1
+NumRules=5
+AndMethod='min'
+OrMethod='max'
+ImpMethod='min'
+AggMethod='max'
+DefuzzMethod='centroid'
+
+[Input1]
+Name='水位'
+Range=[-1 1]
+NumMFs=3
+MF1='高':'gaussmf',[0.4 -1]
+MF2='正常':'gaussmf',[0.4 0]
+MF3='低':'gaussmf',[0.4 1]
+
+[Input2]
+Name='水位变化率'
+Range=[-0.2 0.2]
+NumMFs=3
+MF1='负':'gaussmf',[0.04 -0.2]
+MF2='不变':'gaussmf',[0.04 0]
+MF3='正':'gaussmf',[0.04 0.2]
+
+[Output1]
+Name='阀门开度'
+Range=[-1 1]
+NumMFs=5
+MF1='快速关闭':'trimf',[-1 -0.8 -0.7]
+MF2='缓慢关闭':'trimf',[-0.5 -0.3 -0.2]
+MF3='不变':'trimf',[-0.1 0 0.1]
+MF4='缓慢打开':'trimf',[0.3 0.4 0.5]
+MF5='快速打开':'trimf',[0.7 0.8 1]
+
+[Rules]
+2 0, 3 (1) : 1
+3 0, 5 (1) : 1
+1 0, 1 (1) : 1
+2 3, 2 (1) : 1
+2 1, 4 (1) : 1

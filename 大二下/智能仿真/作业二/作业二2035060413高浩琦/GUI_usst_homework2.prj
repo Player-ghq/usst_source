@@ -1,0 +1,103 @@
+<deployment-project plugin="plugin.apptool" plugin-version="1.0">
+  <configuration build-checksum="687506591" file="C:\Users\12732\Desktop\matlab\作业二\GUI_usst_homework2.prj" location="C:\Users\12732\Desktop\matlab\作业二" name="GUI_usst_homework2" target="target.mlapps" target-name="Package App">
+    <param.appname>GUI_usst_homework2</param.appname>
+    <param.authnamewatermark>Runny_ghq</param.authnamewatermark>
+    <param.email>bjdxghq@qq.com</param.email>
+    <param.company>usst</param.company>
+    <param.icon />
+    <param.icons />
+    <param.summary>USST_MATLAB
+用GUI的形式来填写数据,绘制图像</param.summary>
+    <param.description>背景   销售高尔夫手推车   普通的生产--消费者模型===ghq  2022.3.21
+默认 有数据(可更改)  
+plot 绘制图像
+generate 生成文本
+clear  清楚图像和文本
+save 保存 plansales信息</param.description>
+    <param.screenshot>C:\Users\12732\AppData\Local\Temp\tp7225b860_3a9e_4379_ae1f_8bc77422884d.png</param.screenshot>
+    <param.version>1.0</param.version>
+    <param.products.name />
+    <param.products.id />
+    <param.products.version />
+    <param.platforms />
+    <param.output>C:\Users\12732\Desktop\matlab\作业二</param.output>
+    <param.guid>93ff8e8d-6e8f-46f0-8730-cea437752175</param.guid>
+    <unset>
+      <param.company />
+      <param.icon />
+      <param.icons />
+      <param.version />
+      <param.products.name />
+      <param.products.id />
+      <param.products.version />
+      <param.platforms />
+      <param.output />
+    </unset>
+    <fileset.main>
+      <file>${PROJECT_ROOT}\app1.mlapp</file>
+    </fileset.main>
+    <fileset.depfun />
+    <fileset.resources />
+    <fileset.package />
+    <build-deliverables>
+      <file location="C:\Users\12732\Desktop\matlab" name="作业二" optional="false">C:\Users\12732\Desktop\matlab\作业二</file>
+    </build-deliverables>
+    <workflow />
+    <matlab>
+      <root>D:\Program Files\MATLAB\R2018a</root>
+      <toolboxes>
+        <toolbox name="fixedpoint" />
+        <toolbox name="matlabcoder" />
+        <toolbox name="matlabhdlcoder" />
+        <toolbox name="embeddedcoder" />
+        <toolbox name="gpucoder" />
+        <toolbox name="polyspacebugfinder" />
+      </toolboxes>
+      <toolbox>
+        <fixedpoint>
+          <enabled>true</enabled>
+        </fixedpoint>
+      </toolbox>
+      <toolbox>
+        <matlabcoder>
+          <enabled>true</enabled>
+        </matlabcoder>
+      </toolbox>
+      <toolbox>
+        <matlabhdlcoder>
+          <enabled>true</enabled>
+        </matlabhdlcoder>
+      </toolbox>
+      <toolbox>
+        <embeddedcoder>
+          <enabled>true</enabled>
+        </embeddedcoder>
+      </toolbox>
+      <toolbox>
+        <gpucoder>
+          <enabled>true</enabled>
+        </gpucoder>
+      </toolbox>
+      <toolbox>
+        <polyspacebugfinder>
+          <enabled>true</enabled>
+        </polyspacebugfinder>
+      </toolbox>
+    </matlab>
+    <platform>
+      <unix>false</unix>
+      <mac>false</mac>
+      <windows>true</windows>
+      <win2k>false</win2k>
+      <winxp>false</winxp>
+      <vista>false</vista>
+      <linux>false</linux>
+      <solaris>false</solaris>
+      <osver>10.0</osver>
+      <os32>false</os32>
+      <os64>true</os64>
+      <arch>win64</arch>
+      <matlab>true</matlab>
+    </platform>
+  </configuration>
+</deployment-project>
