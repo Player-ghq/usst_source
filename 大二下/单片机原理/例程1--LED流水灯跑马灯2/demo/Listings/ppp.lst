@@ -1,0 +1,172 @@
+A51 MACRO ASSEMBLER  PPP                                                                  06/12/2022 20:30:04 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\ppp.obj
+ASSEMBLER INVOKED BY: D:\Program Files\Keil_v5\C51\BIN\A51.EXE ppp.asm SET(SMALL) DEBUG PRINT(.\Listings\ppp.lst) OBJECT
+                      (.\Objects\ppp.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     
+                       2     
+                       3     
+                       4     
+                       5     
+0000                   6                     ORG    0000H
+0000 020030            7                     LJMP   MAIN
+                       8     
+0030                   9                     ORG     30H
+0030 75B0F0           10     MAIN:  MOV      P3,#0F0H     ;????????
+0033 7900             11            MOV      R1,#00       ;R1??????
+0035 7FFF             12                MOV          R7,#0FFH     ;??????
+0037 DFFE             13     KEY1:  DJNZ     R7,KEY1      ;????
+                      14     
+0039 75B0F0           15     LOOP:  MOV      P3,#0F0H     ;????????
+003C E5B0             16                MOV          A,P3         ;??P1????
+003E F4               17            CPL      A            ;???,?????????
+003F 54F0             18            ANL      A,#0F0H      ;?????????
+0041 6029             19            JZ       EKEY         ;????:??,????????
+0043 1200A1           20            LCALL    DEL20ms      ;????:??20 ms???
+0046 E5B0             21            MOV      A,P3         ;??P1????
+0048 F4               22            CPL      A            ;???,?????????
+0049 54F0             23            ANL      A,#0F0H      ;?????????
+004B 601F             24            JZ       EKEY         ;????:???,??????????
+004D 7400             25     SKEY:  MOV      A,#00        ;???????,1?1??
+004F F8               26                MOV      R0,A          ;R0??????(X),???0
+0050 FA               27            MOV      R2,A         ;R2??????(Y),???0
+0051 7900             28            MOV      R1,#00       ;R1??????
+0053 7BFE             29            MOV      R3,#0FEH     ;R3??????,?4??????,0?
+0055 EB               30     SKEY2: MOV      A,R3
+0056 F5B0             31            MOV      P3,A         ;??????,?4??1
+0058 00               32            NOP
+0059 00               33                NOP
+005A 00               34            NOP                   ;3?NOP???P1?????
+005B E5B0             35                MOV          A,P3         ;???
+005D F9               36                MOV          R1,A         ;????
+005E F4               37                CPL          A            ;????????
+005F 54F0             38                ANL          A,#0F0H      ;???
+0061 700F             39     S123: JNZ               SKEY3        ;??????:?SKEY3     ??????
+0063 08               40            INC              R0           ;??????:?????1
+0064 D3               41            SETB             C            ;????????1?,
+0065 EB               42                MOV          A,R3         ;R3???C??1?
+0066 33               43                RLC          A                        ;?????????R3
+0067 FB               44                MOV          R3,A       
+0068 E8               45                MOV          A,R0
+0069 B404E9           46                CJNE         A,#04H,SKEY2 ;?????(4?)????
+006C 00               47     EKEY:  NOP
+006D 1200AA           48                LCALL   DISPLAY
+0070 0139             49                AJMP    LOOP
+                      50                                              ;??(R2)??
+0072 E9               51     SKEY3:  MOV     A,R1
+0073 30E40B           52                     JNB             ACC.4,SKEY5
+0076 30E50D           53                     JNB             ACC.5,SKEY6
+0079 30E60F           54                     JNB             ACC.6,SKEY7
+007C 30E711           55                     JNB             ACC.7,SKEY8
+007F 016C             56                     AJMP    EKEY
+                      57     
+A51 MACRO ASSEMBLER  PPP                                                                  06/12/2022 20:30:04 PAGE     2
+
+0081 7400             58     SKEY5:  MOV             A,#00H
+0083 FA               59                     MOV             R2,A         ;?0??
+0084 0195             60                     AJMP    DKEY
+                      61     
+0086 7401             62     SKEY6:  MOV             A,#01H
+0088 FA               63                     MOV             R2,A         ;?1??
+0089 0195             64                     AJMP    DKEY
+                      65     
+008B 7402             66     SKEY7:  MOV             A,#02H
+008D FA               67                     MOV             R2,A         ;?2??
+008E 0195             68                     AJMP    DKEY
+                      69     
+0090 7403             70     SKEY8:  MOV             A,#03H
+0092 FA               71                     MOV             R2,A         ;?3??
+0093 0195             72                     AJMP    DKEY
+                      73                                 ;?????
+0095 1199             74     DKEY:   ACALL   DECODE
+0097 016C             75                     AJMP    EKEY
+                      76     ;**************************************
+                      77     ;???
+                      78     ;**************************************
+                      79                                                     ;??(??)?????
+0099 E8               80     DECODE: MOV             A,R0            ;????A
+009A 75F004           81                     MOV             B,#04H          ;???????
+009D A4               82                     MUL             AB          ;??×???
+009E 2A               83                     ADD             A,R2            ;??×???+??=??
+009F F9               84                     MOV     R1,A        ;????
+00A0 22               85                     RET
+                      86     ;**************************************
+                      87     ;?????20ms??
+                      88     ;**************************************
+00A1 7C28             89     DEL20ms:MOV     R4,#040
+00A3 7DFF             90     D1:             MOV             R5,#0FFH
+00A5 DDFE             91     D2:             DJNZ    R5,D2
+00A7 DCFA             92                     DJNZ    R4,D1
+00A9 22               93                     RET
+                      94     ;**************************************
+                      95     ;**************************************
+                      96             
+                      97     ;**************************************
+00AA                  98     DISPLAY:        
+00AA E9               99             MOV             A,R1
+00AB 9000C2          100             MOV             DPTR,#TAB       ;???????DPTR
+00AE 93              101             MOVC    A,@A+DPTR       ;????
+00AF F580            102             MOV             P0,A            ;????
+00B1 D2A6            103             SETB    P2.6            ;????
+00B3 00              104             NOP
+00B4 00              105             NOP
+00B5 C2A6            106             CLR     P2.6
+00B7 741F            107             MOV             A,#01FH         ;????
+00B9 F580            108             MOV             P0,A           ;????
+00BB D2A7            109             SETB    P2.7           ;????
+00BD 00              110             NOP
+00BE 00              111             NOP
+00BF C2A7            112             CLR     P2.7
+00C1 22              113             RET
+                     114     
+00C2 3F065B4F        115     TAB:DB          3FH,06H,5BH,4FH,66H,6DH,7DH,07H,7FH
+00C6 666D7D07                
+00CA 7F                      
+00CB 6F777C39        116             DB              6FH,77H,7CH,39H,5EH,79H,71H,40H,00H
+00CF 5E797140                
+00D3 00                      
+                     117     ;**************************************
+                     118             END
+A51 MACRO ASSEMBLER  PPP                                                                  06/12/2022 20:30:04 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ACC. . . . . . . .  D ADDR   00E0H   A   
+B. . . . . . . . .  D ADDR   00F0H   A   
+D1 . . . . . . . .  C ADDR   00A3H   A   
+D2 . . . . . . . .  C ADDR   00A5H   A   
+DECODE . . . . . .  C ADDR   0099H   A   
+DEL20MS. . . . . .  C ADDR   00A1H   A   
+DISPLAY. . . . . .  C ADDR   00AAH   A   
+DKEY . . . . . . .  C ADDR   0095H   A   
+EKEY . . . . . . .  C ADDR   006CH   A   
+KEY1 . . . . . . .  C ADDR   0037H   A   
+LOOP . . . . . . .  C ADDR   0039H   A   
+MAIN . . . . . . .  C ADDR   0030H   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+S123 . . . . . . .  C ADDR   0061H   A   
+SKEY . . . . . . .  C ADDR   004DH   A   
+SKEY2. . . . . . .  C ADDR   0055H   A   
+SKEY3. . . . . . .  C ADDR   0072H   A   
+SKEY5. . . . . . .  C ADDR   0081H   A   
+SKEY6. . . . . . .  C ADDR   0086H   A   
+SKEY7. . . . . . .  C ADDR   008BH   A   
+SKEY8. . . . . . .  C ADDR   0090H   A   
+TAB. . . . . . . .  C ADDR   00C2H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
