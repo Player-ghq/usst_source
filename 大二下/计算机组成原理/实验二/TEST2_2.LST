@@ -1,0 +1,88 @@
+Microsoft (R) Macro Assembler Version 5.00                  6/20/22 21:15:51
+                                                             Page     1-1
+
+
+       1				;默认采用ML6.11汇编程序 
+       2 0000				DATAS SEGMENT 
+       3				 
+       4 0000  40 20 60 80			ARRAY1 DB 40H,20H,60H,80H 
+       5 0004  0004[				AD DB 4 DUP(?) 
+       6	    ??			
+       7			 ]	
+       8				
+       9 0008  00				MIN DB 00H 
+      10				    ;此处输入数据段代码   
+      11 0009				DATAS ENDS 
+      12				 
+      13 0000				STACKS SEGMENT 
+      14				    ;此处输入堆栈段代码 
+      15 0000				STACKS ENDS 
+      16				 
+      17 0000				CODES SEGMENT 
+      18				    ASSUME CS:CODES,DS:DATAS,SS:STACKS 
+      19 0000				START: 
+      20 0000  B8 ---- R		    MOV AX,DATAS 
+      21 0003  8E D8			    MOV DS,AX 
+      22				    ;此处输入代码段代码 
+      23				     
+      24				        ;求min 
+      25 0005  BE 0000 R		    MOV SI,OFFSET ARRAY1 
+      26 0008  B9 0003			    MOV CX,3 
+      27 000B  B4 00			    MOV AH,00H 
+      28 000D  8A 1C			    MOV BL,[SI] 
+      29 000F  88 1E 0008 R		    MOV MIN,BL 
+      30				     
+      31 0013  46			L2: INC SI 
+      32 0014  8A 04			    MOV AL,[SI] 
+      33 0016  3A 06 0008 R		    CMP AL,MIN 
+      34 001A  72 02			    JC L3 
+      35 001C  73 06				JNC LOOP1 
+      36					 
+      37 001E  A2 0008 R		L3:  MOV MIN,AL 
+      38 0021  EB 01 90				JMP LOOP1 
+      39				 
+      40 0024  E2 ED			LOOP1: LOOP L2 
+      41					 
+      42				     
+      43 0026  B4 4C			    MOV AH,4CH 
+      44 0028  CD 21			    INT 21H 
+      45 002A				CODES ENDS 
+      46				    END START 
+Microsoft (R) Macro Assembler Version 5.00                  6/20/22 21:15:51
+                                                             Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+CODES  . . . . . . . . . . . . .  	002A	PARA	NONE	
+DATAS  . . . . . . . . . . . . .  	0009	PARA	NONE	
+STACKS . . . . . . . . . . . . .  	0000	PARA	NONE	
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+AD . . . . . . . . . . . . . . .  	L BYTE	0004	DATAS	Length = 0004
+ARRAY1 . . . . . . . . . . . . .  	L BYTE	0000	DATAS
+
+L2 . . . . . . . . . . . . . . .  	L NEAR	0013	CODES
+L3 . . . . . . . . . . . . . . .  	L NEAR	001E	CODES
+LOOP1  . . . . . . . . . . . . .  	L NEAR	0024	CODES
+
+MIN  . . . . . . . . . . . . . .  	L BYTE	0008	DATAS
+
+START  . . . . . . . . . . . . .  	L NEAR	0000	CODES
+
+@FILENAME  . . . . . . . . . . .  	TEXT  test2_2		
+
+
+     43 Source  Lines
+     43 Total   Lines
+     12 Symbols
+
+  50526 + 465266 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors

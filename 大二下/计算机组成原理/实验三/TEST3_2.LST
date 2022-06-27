@@ -1,0 +1,108 @@
+Microsoft (R) Macro Assembler Version 5.00                  6/20/22 21:33:56
+                                                             Page     1-1
+
+
+       1				;默认采用ML6.11汇编程序 
+       2 0000				DATAS SEGMENT 
+       3 0000  32 30 32 32 36 37 34		plainText DB '20226745',13,10,'
+					$' 
+       4       35 0D 0A 24		
+       5				 
+       6 000B  31 32 33 34 35 36 37		key DB '1','2','3','4','5','6',
+					'7','8' 
+       7       38			
+       8				    ;此处输入数据段代码   
+       9 0013				DATAS ENDS 
+      10				 
+      11 0000				STACKS SEGMENT 
+      12				    ;此处输入堆栈段代码 
+      13 0000				STACKS ENDS 
+      14				 
+      15 0000				CODES SEGMENT 
+      16				    ASSUME CS:CODES,DS:DATAS,SS:STACKS 
+      17 0000				START: 
+      18 0000  B8 ---- R		    MOV AX,DATAS 
+      19 0003  8E D8			    MOV DS,AX 
+      20				    ;此处输入代码段代码 
+      21				     
+      22				     
+      23				     
+      24 0005  BE 000B R		    MOV SI,OFFSET key 
+      25 0008  BF 0000 R		    MOV DI,OFFSET plainText 
+      26 000B  B9 0008				MOV CX,08H 
+      27					 
+      28 000E  8A 1C			L1: MOV BL,[SI] 
+      29 0010  30 1D				XOR [DI],BL 
+      30 0012  46				INC SI 
+      31 0013  47				INC DI 
+      32 0014  E2 F8				LOOP L1  
+      33					 
+      34					;MOV AL,plainText 
+      35					 
+      36 0016  8D 16 0000 R			LEA DX,plainText 
+      37 001A  B4 09			    MOV AH,09H 
+      38 001C  CD 21			    INT 21H 
+      39				     
+      40					 
+      41					 
+      42					 
+      43				 
+      44 001E  BE 000B R		    MOV SI,OFFSET key 
+      45 0021  BF 0000 R		    MOV DI,OFFSET plainText 
+      46 0024  B9 0008			    MOV CX,08H 
+      47				     
+      48 0027  8A 1C			L2: MOV BL,[SI] 
+      49 0029  30 1D				XOR [DI],BL 
+      50 002B  46				INC SI 
+      51 002C  47				INC DI 
+      52 002D  E2 F8				LOOP L2 
+Microsoft (R) Macro Assembler Version 5.00                  6/20/22 21:33:56
+                                                             Page     1-2
+
+
+      53					 
+      54 002F  8D 16 0000 R			LEA DX,plainText 
+      55 0033  B4 09			    MOV AH,09H 
+      56 0035  CD 21			    INT 21H 
+      57				     
+      58				     
+      59 0037  B4 4C			    MOV AH,4CH 
+      60 0039  CD 21			    INT 21H 
+      61 003B				CODES ENDS 
+      62				    END START 
+Microsoft (R) Macro Assembler Version 5.00                  6/20/22 21:33:56
+                                                             Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+CODES  . . . . . . . . . . . . .  	003B	PARA	NONE	
+DATAS  . . . . . . . . . . . . .  	0013	PARA	NONE	
+STACKS . . . . . . . . . . . . .  	0000	PARA	NONE	
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+KEY  . . . . . . . . . . . . . .  	L BYTE	000B	DATAS
+
+L1 . . . . . . . . . . . . . . .  	L NEAR	000E	CODES
+L2 . . . . . . . . . . . . . . .  	L NEAR	0027	CODES
+
+PLAINTEXT  . . . . . . . . . . .  	L BYTE	0000	DATAS
+
+START  . . . . . . . . . . . . .  	L NEAR	0000	CODES
+
+@FILENAME  . . . . . . . . . . .  	TEXT  test3_2		
+
+
+     60 Source  Lines
+     60 Total   Lines
+     10 Symbols
+
+  50530 + 465262 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors

@@ -1,0 +1,104 @@
+Microsoft (R) Macro Assembler Version 5.00                  6/20/22 21:29:42
+                                                             Page     1-1
+
+
+       1				;默认采用ML6.11汇编程序 
+       2 0000				DATAS SEGMENT 
+       3 0000  04				AN DB 04H 
+       4 0001  08				BN DB 08H 
+       5 0002  00				PRODUCT DB 00H 
+       6					;plainText DB '22212411',13,10,
+					'$' 
+       7				    ;此处输入数据段代码   
+       8 0003				DATAS ENDS 
+       9				 
+      10 0000				STACKS SEGMENT 
+      11				 
+      12				    ;此处输入堆栈段代码 
+      13 0000				STACKS ENDS 
+      14				 
+      15 0000				CODES SEGMENT 
+      16				    ASSUME CS:CODES,DS:DATAS,SS:STACKS 
+      17 0000				START: 
+      18 0000  B8 ---- R		    MOV AX,DATAS 
+      19 0003  8E D8			    MOV DS,AX 
+      20				 
+      21					;初始化 
+      22				 
+      23 0005  A0 0000 R		    MOV AL,AN 
+      24 0008  B4 00			    MOV AH,00H  
+      25 000A  8A 1E 0001 R		    MOV BL,BN 
+      26 000E  B7 00			    MOV BH,00H 
+      27 0010  B9 0008			    MOV CX,08H 
+      28				     
+      29				         
+      30				    ;al右移动  bl左移 
+      31 0013  D0 E8			L1: SHR AL,1 
+      32 0015  72 05				JC L2 
+      33 0017  D0 E3				SHL BL,1 
+      34 0019  EB 08 90				JMP L3 
+      35					 
+      36 001C  02 FB			L2: ADD BH,BL 
+      37					;ADD BH 
+      38 001E  D0 E3				SHL BL,1 
+      39					 
+      40 0020  EB 01 90				JMP L3 
+      41					 
+      42					;如果al=1 跳出循环 
+      43 0023  3C 01			L3: CMP AL,1 
+      44 0025  74 02				JE L4 
+      45 0027  E2 EA				LOOP L1 
+      46				 
+      47 0029  02 FB			L4:	ADD BH,BL 
+      48 002B  88 3E 0002 R			MOV PRODUCT,BH 
+      49				 
+      50				    
+      51				     
+      52 002F  B4 4C			    MOV AH,4CH 
+      53 0031  CD 21			    INT 21H 
+Microsoft (R) Macro Assembler Version 5.00                  6/20/22 21:29:42
+                                                             Page     1-2
+
+
+      54 0033				CODES ENDS 
+      55				    END START 
+Microsoft (R) Macro Assembler Version 5.00                  6/20/22 21:29:42
+                                                             Symbols-1
+
+
+Segments and Groups:
+
+                N a m e         	Length	 Align	Combine Class
+
+CODES  . . . . . . . . . . . . .  	0033	PARA	NONE	
+DATAS  . . . . . . . . . . . . .  	0003	PARA	NONE	
+STACKS . . . . . . . . . . . . .  	0000	PARA	NONE	
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+AN . . . . . . . . . . . . . . .  	L BYTE	0000	DATAS
+
+BN . . . . . . . . . . . . . . .  	L BYTE	0001	DATAS
+
+L1 . . . . . . . . . . . . . . .  	L NEAR	0013	CODES
+L2 . . . . . . . . . . . . . . .  	L NEAR	001C	CODES
+L3 . . . . . . . . . . . . . . .  	L NEAR	0023	CODES
+L4 . . . . . . . . . . . . . . .  	L NEAR	0029	CODES
+
+PRODUCT  . . . . . . . . . . . .  	L BYTE	0002	DATAS
+
+START  . . . . . . . . . . . . .  	L NEAR	0000	CODES
+
+@FILENAME  . . . . . . . . . . .  	TEXT  test3_1		
+
+
+     55 Source  Lines
+     55 Total   Lines
+     13 Symbols
+
+  50604 + 465188 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors
