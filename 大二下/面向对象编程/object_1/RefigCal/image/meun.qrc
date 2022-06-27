@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/">
+        <file>circle.png</file>
+        <file>cone.png</file>
+        <file>cuboid.png</file>
+        <file>cude.png</file>
+        <file>cylinder.png</file>
+        <file>exit.png</file>
+        <file>globe.png</file>
+        <file>introduction.png</file>
+        <file>meun.qrc</file>
+        <file>rectangle.png</file>
+        <file>square.png</file>
+        <file>trapezoid.png</file>
+        <file>triangle.png</file>
+        <file>triangulapyramid.png</file>
+    </qresource>
+</RCC>
